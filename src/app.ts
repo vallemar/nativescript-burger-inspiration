@@ -1,7 +1,7 @@
 import {createApp, registerElement} from 'nativescript-vue';
 import Home from './components/Home.vue';
 import {Pager} from "@nativescript-community/ui-pager";
-import StackSlideTransformation from "~/Transformer.android";
+import StackSlideTransformation from "~/Transformer.ios";
 import {createPinia} from 'pinia'
 import {BottomSheetPlugin} from '@nativescript-community/ui-material-bottomsheet/vue3';
 import {install} from "@nativescript-community/ui-material-bottomsheet";

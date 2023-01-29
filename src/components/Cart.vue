@@ -8,7 +8,7 @@ const {showBottomSheet} = useBottomSheet()
 
 function showDetailCart(){
 
-  showBottomSheet(CartDetails, {peekHeight: 500, transparent: true})
+  showBottomSheet(CartDetails, { transparent: true, ignoreBottomSafeArea: true})
 }
 </script>
 

@@ -22,8 +22,8 @@ function loadedImg(args: any) {
 
   setTimeout(() => {
     img.animate({
-      width: 350,
-      height: 350,
+      width: 250,
+      height: 250,
       scale: {
         x: 1,
         y: 1

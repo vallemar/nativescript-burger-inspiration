@@ -43,7 +43,7 @@ const {closeBottomSheet} = useBottomSheet()
       <FlexboxLayout class="justify-center">
         <Button text="Continue buying"
                 @tap="closeBottomSheet"
-                class="my-12 h-[45] text-lg capitalize bg-[#FFBC0D] rounded-full text-white "></Button>
+                class="my-12 h-[45] px-2 text-lg capitalize bg-[#FFBC0D] rounded-full text-white "></Button>
       </FlexboxLayout>
     </StackLayout>
   </StackLayout>
