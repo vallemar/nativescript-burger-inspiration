@@ -1,7 +1,7 @@
 import { NativeScriptConfig } from '@nativescript/core';
 
 export default {
-  id: 'org.nativescript.nsstarbuck',
+  id: 'org.nativescript.burger',
   appPath: 'src',
   appResourcesPath: 'App_Resources',
   android: {
