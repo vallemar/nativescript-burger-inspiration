@@ -79,7 +79,7 @@ function addToCart() {
 
 <style>
 .view-details {
-  background: rgb(255, 188, 13);
-  background: linear-gradient(118deg, rgba(255, 188, 13, 1) 40%, rgba(255, 255, 255, 1) 79%);
+  background: rgb(255,188,13);
+  background: linear-gradient(185deg, rgba(255,188,13,1) 0%, rgba(255,255,255,1) 90%);
 }
 </style>

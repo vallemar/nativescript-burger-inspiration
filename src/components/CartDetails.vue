@@ -13,7 +13,7 @@ const {closeBottomSheet} = useBottomSheet()
       <Label text="Your dinner!" class="text-2xl my-1 text-black "></Label>
       <LottieView height="85" src="~/assets/burger.json" :loop="true" :autoPlay="true"></LottieView>
     </FlexboxLayout>
-    <StackLayout v-if="cartStore.cart && cartStore.cart.items.length > 0">
+    <StackLayout v-if="!cartStore.isEmpty">
       <StackLayout class="rounded-2xl  pl-2">
         <FlexboxLayout v-for="(item, i) in cartStore.cart.items" :key="i"
                        class="border-b-2 my-2 py-2 pr-2 items-center justify-between">

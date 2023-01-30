@@ -6,6 +6,7 @@ import {computed} from "vue";
 
 export const useCartStore = defineStore('cart', () => {
     const items = ref<Item[]>([]);
+    const isEmpty = computed(() => items.value.length === 0);
     const cart = computed(() => {
         const carGroupById = items.value.reduce((acc: any, curr) => {
             if (!acc[curr.id]) acc[curr.id] = [];
@@ -26,5 +27,5 @@ export const useCartStore = defineStore('cart', () => {
             totalPrice: items.value.reduce((a: number, b: Item) => a + b.price, 0)
         }
     })
-    return {items, cart}
+    return {items, cart, isEmpty}
 })
