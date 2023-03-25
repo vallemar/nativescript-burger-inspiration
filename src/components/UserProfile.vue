@@ -3,6 +3,6 @@
     <Image src="https://pbs.twimg.com/profile_images/1322347195/DSCF1707_bigger.JPG" class="rounded-full" width="34"
            height="34"
            stretch="aspectFill"></Image>
-    <Label text="Vallemar" class="mx-3 text-lg"></Label>
+    <Label text="Vallemar" class="mx-3 text-lg text-black"></Label>
   </FlexboxLayout>
 </template>

@@ -14,9 +14,14 @@ const props = defineProps({
 const refItem = ref()
 const refItemImage = ref()
 const durationAnimation = 200
+
 watch(() => props.selected, (oldValue, newValue) => {
   checkSelection();
 });
+
+onMounted(() => {
+  setTimeout(() => checkSelection(), 250)
+})
 
 function checkSelection() {
   const view = isAndroid ? (toRaw(refItem.value.nativeView) as View) : (toRaw(refItemImage.value.nativeView) as View)
@@ -39,18 +44,13 @@ function checkSelection() {
   }
 }
 
-onMounted(() => {
-  setTimeout(() => checkSelection(), 250)
-})
-const translateY = computed(() => props.index < 3 ? 15 : 15 + (props.index * 13));
 
 </script>
 
 <template>
   <FlexboxLayout ref="refItem"
                  verticalAlignment="top"
-                 class="rounded-full bg-[#FDCC0077] items-center justify-center  mx-3 h-[65] w-[65]"
-                 :style="{ 'margin-top': translateY  }"
+                 class="rounded-full bg-[#FDCC0077] items-center justify-center  mx-2 mt-6 h-[70] w-[70] "
   >
     <Image
         ref="refItemImage"

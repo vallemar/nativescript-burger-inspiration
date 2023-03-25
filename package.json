@@ -12,6 +12,8 @@
     "pinia": "^2.0.29"
   },
   "devDependencies": {
+    "@nativescript-dom/core-types": "^1.0.25",
+    "@nativescript-dom/vue-types": "^1.0.14",
     "@nativescript/android": "8.4.0",
     "@nativescript/ios": "8.4.1",
     "@nativescript/tailwind": "^2.0.1",

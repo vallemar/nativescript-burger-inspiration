@@ -51,14 +51,6 @@ const onSelect = (index: number) => {
   currentCard.value = index;
 }
 
-function loadedPager(args: { object: any }) {
-  if (isAndroid) {
-    const viewPager: androidx.viewpager2.widget.ViewPager2 = (args.object as NSPager).nativeView;
-    viewPager.setOffscreenPageLimit(3);
-  } else {
-    const collectionView: UICollectionView = ((args.object as NSPager).nativeView).subviews[0]
-  }
-}
 
 
 function loadedPage(args: { object: any }) {
@@ -100,9 +92,9 @@ function goTo(args: any, index: number) {
                   <Label row="1" col="0" text="Good" class="text-4xl font-bold text-white mt-2"></Label>
                   <Label row="1" col="1" text="Mood." class="mx-2 text-4xl font-bold text-black mt-2"></Label>
                 </GridLayout>
-                <FlexboxLayout row="1" verticalAlignment="bottom" class="">
+                <FlexboxLayout row="1" verticalAlignment="bottom" class="pt-2">
                   <FlexboxLayout class=" flex-col justify-between bg-[#FEFEFE] w-full"
-                                 :style="[`border-top-right-radius: ${Screen.mainScreen.widthDIPs / 2}`]"
+                                 :style="[`border-top-right-radius: ${Screen.mainScreen.widthDIPs / 4}`]"
                   >
                     <StackLayout verticalAlignment="top" orientation="horizontal" class="" height="200">
                       <PreviewItem v-for="(item, i) in items" :key="i" :img="item.img" :index="i"
@@ -113,8 +105,7 @@ function goTo(args: any, index: number) {
                       <Pager height="400"
                              @selectedIndexChange="onChangeSelected"
                              :selectedIndex="currentCard"
-                             transformers="stack"
-                             @loaded="loadedPager">
+                             transformers="stack">
                         <PagerItem v-for="(item, i) in items" :key="i" :index="i" class="android:m-12">
                           <StackLayout orientation="vertical">
                             <FlexboxLayout

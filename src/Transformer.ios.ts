@@ -3,12 +3,11 @@ import {Pager} from "@nativescript-community/ui-pager";
 export default function (i: number, uiCollectionViewLayoutAttributes: UICollectionViewLayoutAttributes, owner: Pager, collectionView: UICollectionView) {
     const animation = new LinearCardAttributesAnimator(i, uiCollectionViewLayoutAttributes, owner, collectionView)
     animation.animate()
-
-    //OR use PageAttributesAnimator or xxx
 }
 
 
 class BasePagerAnimation {
+    i = 0;
     attributes: UICollectionViewLayoutAttributes;
     owner: Pager;
     collectionView: UICollectionView;
@@ -25,30 +24,34 @@ class BasePagerAnimation {
     endOffset = 0
 
     constructor(i: number, uiCollectionViewLayoutAttributes: UICollectionViewLayoutAttributes, owner: Pager, collectionView: UICollectionView) {
+        this.i = i;
         this.attributes = uiCollectionViewLayoutAttributes;
         this.owner = owner;
         this.collectionView = collectionView;
         this.scrollDirection = owner.orientation === "horizontal" ? UICollectionViewScrollDirection.Horizontal : UICollectionViewScrollDirection.Vertical
+        this.update();
+    }
 
+    update(){
         let distance: any
         let itemOffset: any
 
         if (this.scrollDirection == UICollectionViewScrollDirection.Horizontal) {
-            distance = collectionView.frame.size.width;
-            itemOffset = uiCollectionViewLayoutAttributes.center.x - collectionView.contentOffset.x
-            this.startOffset = (uiCollectionViewLayoutAttributes.frame.origin.x - collectionView.contentOffset.x) / uiCollectionViewLayoutAttributes.frame.size.width
-            this.endOffset = (uiCollectionViewLayoutAttributes.frame.origin.x - collectionView.contentOffset.x - collectionView.frame.size.width) / uiCollectionViewLayoutAttributes.frame.size.width
+            distance = this.collectionView.frame.size.width;
+            itemOffset = this.attributes.center.x - this.collectionView.contentOffset.x
+            this.startOffset = (this.attributes.frame.origin.x - this.collectionView.contentOffset.x) / this.attributes.frame.size.width
+            this.endOffset = (this.attributes.frame.origin.x - this.collectionView.contentOffset.x - this.collectionView.frame.size.width) / this.attributes.frame.size.width
         } else {
-            distance = collectionView.frame.size.height
-            itemOffset = uiCollectionViewLayoutAttributes.center.y - collectionView.contentOffset.y
-            this.startOffset = (uiCollectionViewLayoutAttributes.frame.origin.y - collectionView.contentOffset.y) / uiCollectionViewLayoutAttributes.frame.size.height
-            this.endOffset = (uiCollectionViewLayoutAttributes.frame.origin.y - collectionView.contentOffset.y - collectionView.frame.size.height) / uiCollectionViewLayoutAttributes.frame.size.height
+            distance = this.collectionView.frame.size.height
+            itemOffset = this.attributes.center.y - this.collectionView.contentOffset.y
+            this.startOffset = (this.attributes.frame.origin.y - this.collectionView.contentOffset.y) / this.attributes.frame.size.height
+            this.endOffset = (this.attributes.frame.origin.y - this.collectionView.contentOffset.y - this.collectionView.frame.size.height) / this.attributes.frame.size.height
         }
 
         this.middleOffset = itemOffset / distance - 0.5
         // Cache the contentView since we're going to use it a lot.
         if (this.contentView == null) {
-            let c = collectionView.cellForItemAtIndexPath(uiCollectionViewLayoutAttributes.indexPath)?.contentView;
+            let c = this.collectionView.cellForItemAtIndexPath(this.attributes.indexPath)?.contentView;
             this.contentView = c
         }
     }

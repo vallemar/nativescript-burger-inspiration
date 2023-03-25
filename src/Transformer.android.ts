@@ -1,54 +1,50 @@
-import {Utils} from "@nativescript/core";
+import { Utils } from "@nativescript/core";
 
+let linearCardTransformation: LinearCardTransformation = null!;
 
 @NativeClass
 @Interfaces([androidx.viewpager2.widget.ViewPager2.PageTransformer])
 export default class UserTransitionTransformation extends java.lang.Object implements androidx.viewpager2.widget.ViewPager2.PageTransformer {
     transformPage(page: android.view.View, position: any) {
-        const linearCardTransformation = new LinearCardTransformation(page, position);
-        linearCardTransformation.animate()
+        if (linearCardTransformation == null) {
+            linearCardTransformation = new LinearCardTransformation(page);
+        }
+        linearCardTransformation.animate(page, position)
     }
 }
 
 class BasePagerAnimation {
-    page: android.view.View;
-    position: number;
 
-    constructor(page: android.view.View, position: number) {
-        this.page = page;
-        this.position = position;
+    viewPager: androidx.viewpager2.widget.ViewPager2;
+
+    constructor(page: android.view.View) {
+        this.viewPager = page.getParent().getParent() as androidx.viewpager2.widget.ViewPager2;
     }
 }
 
 class LinearCardTransformation extends BasePagerAnimation {
-    constructor(page: android.view.View, position: number) {
-        super(page, position);
+    constructor(page: android.view.View) {
+        super(page);
     }
 
     // Note: for this transformer to work well on android the item pages must have a margin
-    animate(translate = 80, staleFactor = 0.28) {
+    animate(page: android.view.View, position: number, translate = 80, staleFactor = 0.28) {
+        this.viewPager.setClipToPadding(false);
+        this.viewPager.setClipChildren(false);
 
-        const viewPager = this.page.getParent().getParent() as androidx.viewpager2.widget.ViewPager2
-        const page = this.page
-        const position = this.position
-        // viewPager.setOffscreenPageLimit(3);
-        viewPager.setClipToPadding(false);
-        viewPager.setClipChildren(false);
-
-        androidx.core.view.ViewCompat.setElevation(this.page, -Math.abs(this.position))
+        androidx.core.view.ViewCompat.setElevation(page, -Math.abs(position))
 
         const pageTranslationX = Utils.layout.toDevicePixels(translate);
 
         if (position < -1) {
-            this.page.setTranslationY(-(pageTranslationX) * this.position)
+            page.setTranslationY(-(pageTranslationX) * position)
         } else if (position <= 0) {
-            this.page.setTranslationY(-(pageTranslationX) * this.position)
+            page.setTranslationY(-(pageTranslationX) * position)
         } else if (position <= 1) {
-            this.page.setTranslationY(+(pageTranslationX) * this.position)
+            page.setTranslationY(+(pageTranslationX) * position)
         } else {
-            this.page.setTranslationY(+(pageTranslationX) * this.position)
-
+            page.setTranslationY(+(pageTranslationX) * position)
         }
-        this.page.setTranslationX(-(pageTranslationX) * this.position)
+        page.setTranslationX(-(pageTranslationX) * position)
     }
 }
