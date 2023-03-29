@@ -57,34 +57,7 @@ function loadedPage(args: { object: any }) {
 function goTo(args: any, index: number) {
   const img = args.object as NSImage
   const item = items[index];
-/*   const config: SharedTransitionConfig = {
-      pageStart: {
-        x: 0,
-        y: 300,
-        // Try commenting above values and uncommenting these...
-        // x: 0,
-        // y: -300,
-      },
-      pageEnd: {
-        // use nice linear duration on Android
-        duration: global.isAndroid ? 500 : 500,
-        // use custom spring on iOS
-        spring: { tension: 60, friction: 8, mass: 4 },
-        opacity: 1,
-     
-      },
-      pageReturn: {
-        duration: 500,
-        x: -Screen.mainScreen.widthDIPs,
-        y: 0,
-        opacity: 0,
-      },
-      interactive:{
-        dismiss:{
-        finishThreshold:0.5
-        }
-      }
-  }; */
+
   $navigateTo(Details, {
     transition: SharedTransition.custom(new PageTransition()),
     props: {
@@ -124,21 +97,7 @@ function goTo(args: any, index: number) {
                         :selected="currentCard === i" @tap="onSelect(i)" ignoreTouchAnimation="true"></PreviewItem>
                     </StackLayout>
                     <ContentView>
-                      <Pager height="400" @selectedIndexChange="onChangeSelected" :selectedIndex="currentCard"
-                        transformers="stack">
-                        <PagerItem v-for="(item, i) in items" :key="i" :index="i" class="android:m-12">
-                          <StackLayout orientation="vertical" @tap="goTo($event, i)">
-                            <FlexboxLayout
-                              class="w-[100%] h-[70%] rounded-3xl justify-center items-center flex-col bg-[#FDCC0077] py-2">
-                              <Image :src="item.img" :sharedTransitionTag="`image_${i}`" />
-                            </FlexboxLayout>
-                            <Label :text="item.name" class="font-bold text-lg text-center mt-1 text-black"
-                              :sharedTransitionTag="`title_${i}`"></Label>
-                            <Label :text="`${item.price}${item.currency}`" class="font-bold text-gray-400 text-center"
-                              :sharedTransitionTag="`price_${i}`"></Label>
-                          </StackLayout>
-                        </PagerItem>
-                      </Pager>
+                      <Image :src="items[0].img" sharedTransitionTag="image"  @tap="goTo($event, 0)"/>
                     </ContentView>
                   </FlexboxLayout>
                 </FlexboxLayout>
