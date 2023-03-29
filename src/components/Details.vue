@@ -6,35 +6,13 @@ import Header from "./Header.vue";
 import QuickPurchase from "~/components/QuickPurchase.vue";
 
 const props = defineProps({
-  item: Object,
-  positionImg: Object,
-  size: Object
+  item: Object
 })
 
 const cartStore = useCartStore();
 
 function loadedImg(args: any) {
-  const img = args.object as NSImage
-  img.translateX = props.positionImg.x - (props.size.width / 2.5)
-  img.translateY = props.positionImg.y - (props.size.height / 2)
-  img.width = props.size.width
-  img.height = props.size.height
-
-  setTimeout(() => {
-    img.animate({
-      width: 250,
-      height: 250,
-      scale: {
-        x: 1,
-        y: 1
-      },
-      translate: {
-        y: 0,
-        x: 0
-      },
-      duration: 300,
-    })
-  }, 50)
+ 
 }
 
 function addToCart() {
@@ -54,11 +32,12 @@ function addToCart() {
           <Image
               @loaded="loadedImg"
               class=""
+              sharedTransitionTag="image"
               :src="item.img"/>
           <FlexboxLayout class="px-2 flex-col h-full justify-between">
             <StackLayout>
-              <label :text="item.name" class="text-3xl text-white font-bold"></label>
-              <label :text="`${item.price}${item.currency}`" class="text-xl text-black"></label>
+              <label sharedTransitionTag="title" :text="item.name" class="text-3xl text-white font-bold"></label>
+              <label sharedTransitionTag="price" :text="`${item.price}${item.currency}`" class="text-xl text-black"></label>
               <label textWrap="true"
                      text="A special flavor! Now hotter, juicier and tastier. See for yourself what makes the flavor of this burger special. Is it its exceptional cheese, its tomato slices? Or could it be its lettuce, its fine sauce or its tender bread?"
                      class=" text-black mt-2" style="line-height: 1"></label>
