@@ -33,7 +33,7 @@ function addToCart() {
           <Image
               @loaded="loadedImg"
               class=""
-              :sharedTransitionTag="`title_${props.index}`"
+              :sharedTransitionTag="`image_${props.index}`"
               :src="item.img"/>
           <FlexboxLayout class="px-2 flex-col h-full justify-between">
             <StackLayout>
