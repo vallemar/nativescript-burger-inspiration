@@ -6,7 +6,8 @@ import Header from "./Header.vue";
 import QuickPurchase from "~/components/QuickPurchase.vue";
 
 const props = defineProps({
-  item: Object
+  item: Object,
+  index: Number
 })
 
 const cartStore = useCartStore();
@@ -32,12 +33,12 @@ function addToCart() {
           <Image
               @loaded="loadedImg"
               class=""
-              sharedTransitionTag="image"
+              :sharedTransitionTag="`title_${props.index}`"
               :src="item.img"/>
           <FlexboxLayout class="px-2 flex-col h-full justify-between">
             <StackLayout>
-              <label sharedTransitionTag="title" :text="item.name" class="text-3xl text-white font-bold"></label>
-              <label sharedTransitionTag="price" :text="`${item.price}${item.currency}`" class="text-xl text-black"></label>
+              <label :sharedTransitionTag="`title_${props.index}`" :text="item.name" class="text-3xl text-white font-bold"></label>
+              <label :sharedTransitionTag="`price_${props.index}`" :text="`${item.price}${item.currency}`" class="text-xl text-black"></label>
               <label textWrap="true"
                      text="A special flavor! Now hotter, juicier and tastier. See for yourself what makes the flavor of this burger special. Is it its exceptional cheese, its tomato slices? Or could it be its lettuce, its fine sauce or its tender bread?"
                      class=" text-black mt-2" style="line-height: 1"></label>
